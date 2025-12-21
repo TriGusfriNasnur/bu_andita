@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Hapus Karyawan</title>
+</head>
+<body>
+
+<script>
+  const token = localStorage.getItem('token');
+
+  // ambil id dari URL
+  const id = new URLSearchParams(window.location.search).get('id');
+
+  if (!token) {
+    window.location.href = 'login.html';
+  }
+
+  if (!id) {
+    alert('ID tidak ditemukan');
+    window.location.href = 'alternatif.html';
+  }
+
+  // DELETE alternatif
+  fetch('http://localhost:3000/api/alternatif/${id}', {
+    method: 'DELETE',
+    headers: {
+      'Authorization': 'Bearer ' + token
+    }
+  })
+  .then(res => {
+    if (!res.ok) throw new Error('Gagal menghapus data');
+    window.location.href = 'alternatif.html';
+  })
+  .catch(err => {
+    alert(err.message);
+    window.location.href = 'alternatif.html';
+  });
+</script>
+
+</body>
+</html>

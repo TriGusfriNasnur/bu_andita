@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tri Gusfri Nasnur</title>
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/bootstrap.css">
+    <link rel="stylesheet" href="assets/vendors/iconly/bold.css">
+    <link rel="stylesheet" href="assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
+    <link rel="stylesheet" href="assets/vendors/bootstrap-icons/bootstrap-icons.css">
+    <link rel="stylesheet" href="assets/css/app.css">
+    <link rel="shortcut icon" href="assets/images/favicon.png" type="image/x-icon">
+</head>
+
+<body>
+<div id="app">
+    <div id="sidebar" class="active">
+        <div class="sidebar-wrapper active">
+            <div class="sidebar-header">
+                <div class="d-flex justify-content-between">
+                    <div class="logo">
+                        <a href="./">Al Ihsan 
+                            <p>Al Islamy</p></a>
+                    </div>
+                    <div class="toggler">
+                        <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="sidebar-menu">
+                <ul class="menu">
+                    <li class="sidebar-title">Menu</li>
+                    <li class="sidebar-item">
+                        <a href="./" class='sidebar-link'>
+                            <i class="bi bi-grid-fill"></i>
+                            <span>Beranda</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item  has-sub">
+                        <a href="#" class='sidebar-link'>
+                            <i class="bi bi-file-earmark-spreadsheet-fill"></i>
+                            <span>Karyawan & Kriteria</span>
+                        </a>
+                        <ul class="submenu ">
+                            <li class="submenu-item ">
+                                <a href="alternatif.html">Karyawan</a>
+                            </li>
+                            <li class="submenu-item ">
+                                <a href="bobot.html">Kriteria</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="matrik.html" class='sidebar-link'>
+                            <i class="bi bi-pentagon-fill"></i>
+                            <span>Perhitungan</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="preferensi.html" class='sidebar-link'>
+                            <i class="bi bi-bar-chart-fill"></i>
+                            <span>Peringkat</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="logout.html" class='sidebar-link'>
+                            <i class="bi bi-box-arrow-right"></i>
+                            <span>Keluar</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>
+        </div>
+    </div>
+
+    <div id="main">
+        <header class="mb-3">
+            <a href="#" class="burger-btn d-block d-xl-none">
+                <i class="bi bi-justify fs-3"></i>
+            </a>
+        </header>
+        <div class="page-heading">
+            <h3>Kriteria</h3>
+        </div>
+        <div class="page-content">
+            <section class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">Syarat Kriteria</h4>
+                        </div>
+                        <div class="card-content">
+                            <div class="card-body">
+                                <p class="card-text">Beberapa kriteria, bobot dan atribut yang digunakan sebagai dasar perhitungan dalam metode SAW untuk menentukan karyawan Terbaik</p>
+                            </div>
+
+                            <button type="button" class="btn btn-outline-success btn-sm m-2" id="btnTambahKriteria">
+                                Tambah Kriteria
+                            </button>
+                            <div id="formTambahKriteriaContainer"></div>
+
+                            <div class="table-responsive">
+                                <table class="table table-striped mb-0" id="bobotTableBody"></table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <footer>
+            <div class="footer clearfix mb-0 text-muted">
+                <div class="float-start">
+                    <p>Karyawan Terbaik &copy; Simple Additive Weighting</p>
+                </div>
+                <div class="float-end">
+                    <p>Al Ihsan Al Islamy <span class="text-danger"><i class="bi bi-heart"></i></span> <a
+                            href="">Tri Gusfri Nasnur</a></p>
+                </div>
+            </div>
+        </footer>
+    </div>
+</div>
+
+<script src="assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+<script src="assets/js/bootstrap.bundle.min.js"></script>
+<script src="assets/vendors/apexcharts/apexcharts.js"></script>
+<script src="assets/js/pages/dashboard.js"></script>
+<script src="assets/js/main.js"></script>
+
+<script>
+const token = localStorage.getItem('token');
+const role = localStorage.getItem('role'); // ambil role
+const btnTambah = document.getElementById("btnTambahKriteria");
+const formContainer = document.getElementById("formTambahKriteriaContainer");
+const bobotTableBody = document.getElementById('bobotTableBody');
+let no = 1;
+
+if (!token) {
+    window.location.href = 'login.html';
+}
+
+// Hide Add button jika role bukan admin
+if (role !== 'admin') {
+    btnTambah.style.display = 'none';
+}
+
+// Fungsi menampilkan form tambah kriteria
+btnTambah.addEventListener("click", () => {
+    formContainer.innerHTML = `
+    <div class="card mt-3">
+        <div class="card-header bg-success text-white">Tambah Kriteria</div>
+        <div class="card-body">
+            <table class="table table-bordered">
+                <tr>
+                    <th>Kriteria</th>
+                    <td><input type="text" id="newCriteria" class="form-control"></td>
+                </tr>
+                <tr>
+                    <th>Bobot</th>
+                    <td><input type="number" id="newWeight" class="form-control"></td>
+                </tr>
+                <tr>
+                    <th>Atribut</th>
+                    <td>
+                        <select id="newAttribute" class="form-control">
+                            <option value="benefit">Benefit</option>
+                            <option value="cost">Cost</option>
+                        </select>
+                    </td>
+                </tr>
+            </table>
+            <button class="btn btn-success" onclick="simpanKriteria()">Simpan</button>
+            <button class="btn btn-secondary" onclick="formContainer.innerHTML=''">Batal</button>
+        </div>
+    </div>
+    `;
+});
+
+// Fungsi menyimpan kriteria
+function simpanKriteria() {
+    const criteria = document.getElementById("newCriteria").value;
+    const weight = document.getElementById("newWeight").value;
+    const attribute = document.getElementById("newAttribute").value;
+
+    fetch("http://localhost:3000/api/bobot", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + token
+        },
+        body: JSON.stringify({ criteria, weight, attribute })
+    })
+    .then(res => res.json())
+    .then(data => {
+        alert("Kriteria berhasil ditambahkan!");
+        formContainer.innerHTML = "";
+        no = 1;
+        fetchBobot();
+    })
+    .catch(err => alert("Gagal menambahkan kriteria"));
+}
+
+// Fungsi menampilkan tabel kriteria
+function fetchBobot() {
+    fetch('http://localhost:3000/api/bobot', {
+        method: 'GET',
+        headers: { Authorization: 'Bearer ' + token }
+    })
+    .then(res => res.json())
+    .then(data => {
+        bobotTableBody.innerHTML = '';
+        const headerRow = `<caption>
+        Tabel Kriteria <i class="bi bi-heart"></i>
+        </caption>
+        <tr>
+            <th>Nomor</th>
+            <th>Simbol</th>
+            <th>Kriteria</th>
+            <th>Nilai</th>
+            <th colspan="2">Atribut</th>
+        </tr>`;
+        bobotTableBody.innerHTML += headerRow;
+
+        data.forEach(bobot => {
+            let char = String.fromCharCode(64 + no);
+            let actionBtns = '';
+
+            if (role === 'admin') {
+                actionBtns = `
+                    <a href='bobot-edit.html?id=${bobot.id_criteria}' class='btn btn-info btn-sm'>Edit</a>
+                    <button class='btn btn-danger btn-sm' onclick="hapusKriteria(${bobot.id_criteria})">Hapus</button>`;
+            }
+
+            const row = `
+                <tr>
+                    <td class='right'>${no++}</td>
+                    <td class='center'>${char}</td>
+                    <td>${bobot.criteria}</td>
+                    <td>${bobot.weight}</td>
+                    <td>${bobot.attribute}</td>
+                    <td>${actionBtns}</td>
+                </tr>`;
+            bobotTableBody.innerHTML += row;
+        });
+    })
+    .catch(() => {
+        alert('Gagal mengambil data.');
+    });
+}
+
+// Fungsi hapus kriteria
+function hapusKriteria(id) {
+    if (!confirm("Yakin ingin menghapus kriteria ini?")) return;
+
+    fetch(`http://localhost:3000/api/bobot/${id}`, {
+        method: 'DELETE',
+        headers: { Authorization: 'Bearer ' + token }
+    })
+    .then(res => res.json())
+    .then(() => {
+        alert("Kriteria berhasil dihapus.");
+        no = 1;
+        fetchBobot();
+    })
+    .catch(() => {
+        alert("Gagal menghapus data.");
+    });
+}
+
+fetchBobot();
+</script>
+</body>
+</html>

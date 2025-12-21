@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Get Session</title>
+</head>
+<body>
+
+<script>
+  const token = localStorage.getItem('token');
+  const username = localStorage.getItem('username');
+
+  const response = {
+    username: username ?? null,
+    status: token ? 'login' : 'not_logged_in'
+  };
+
+  // contoh output seperti PHP lama
+  console.log(response);
+
+  // kalau mau dipakai halaman lain
+  if (!token) {
+    window.location.href = 'login.html';
+  }
+</script>
+
+</body>
+</html>

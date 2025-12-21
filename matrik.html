@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tri Gusfri Nasnur</title>
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/bootstrap.css">
+
+    <link rel="stylesheet" href="assets/vendors/iconly/bold.css">
+
+    <link rel="stylesheet" href="assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
+    <link rel="stylesheet" href="assets/vendors/bootstrap-icons/bootstrap-icons.css">
+    <link rel="stylesheet" href="assets/css/app.css">
+    <link rel="shortcut icon" href="assets/images/favicon.png" type="image/x-icon">
+</head>
+
+  <body>
+    <div id="app">
+        <div id="sidebar" class="active">
+    <div class="sidebar-wrapper active">
+        <div class="sidebar-header">
+            <div class="d-flex justify-content-between">
+                <div class="logo">
+                    <a href="./">Al Ihsan 
+                        <p>Al Islamy</p></a>
+                </div>
+                <div class="toggler">
+                    <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="sidebar-menu">
+            <ul class="menu">
+                <li class="sidebar-title">Menu</li>
+
+                <li class="sidebar-item">
+                    <a href="./" class='sidebar-link'>
+                        <i class="bi bi-grid-fill"></i>
+                        <span>Beranda</span>
+                    </a>
+                </li>
+
+                <li class="sidebar-item  has-sub">
+                    <a href="#" class='sidebar-link'>
+                        <i class="bi bi-file-earmark-spreadsheet-fill"></i>
+                        <span>Karyawan & Kriteria</span>
+                    </a>
+                    <ul class="submenu ">
+                        <li class="submenu-item ">
+                            <a href="alternatif.html">Karyawan</a>
+                        </li>
+                        <li class="submenu-item ">
+                            <a href="bobot.html">Kriteria</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="sidebar-item">
+                    <a href="matrik.html" class='sidebar-link'>
+                        <i class="bi bi-pentagon-fill"></i>
+                        <span>Perhitungan</span>
+                    </a>
+                </li>
+
+                <li class="sidebar-item">
+                    <a href="preferensi.html" class='sidebar-link'>
+                        <i class="bi bi-bar-chart-fill"></i>
+                        <span>Peringkat</span>
+                    </a>
+                </li>
+
+                <li class="sidebar-item">
+                    <a href="logout.html" class='sidebar-link'>
+                        <i class="bi bi-box-arrow-right"></i>
+                        <span>Keluar</span>
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+        <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>
+    </div>
+</div>
+      <div id="main">
+        <header class="mb-3">
+          <a href="#" class="burger-btn d-block d-xl-none">
+            <i class="bi bi-justify fs-3"></i>
+          </a>
+        </header>
+        <div class="page-heading">
+          <h3>Perhitungan</h3>
+        </div>
+        <div class="page-content">
+          <section class="row">
+            <div class="col-12">
+              <div class="card">
+
+                <div class="card-header">
+                  <h4 class="card-title">Hitung Kriteria</h4>
+                </div>
+                <div class="card-content">
+                  <div class="card-body">
+                    <p class="card-text">Disini proses perhitungan metode SAW.</p>
+                    <P>◉ <b>Tabel Nilai Mentah</b> adalah nilai mentah yang diberikan oleh admin. Pada nilai <i>Benefit</i> nilai mentah yang diberikan admin dibagi dengan yang terbesar menghasilkan di tabel Normalisasi dan pada nilai <i>Cost</i> nilai terkecil dibagi dengan nilai yang berikan admin menghasilkan di tabel <i>Normalisasi.</i></P>
+                    <P>◉ <b>Tabel Nilai Normalisasi</b> adalah hasil dari <i>Tabel Mentah</i>. Setiap nilai dikalikan dengan syarat kriteria menyesuaikan dengan baris simbol. <b><u>Sehingga terdapat hasil akhir di peringkat.</u></b></P>
+                  </div>
+                  <p id="message"></p>
+                  <button type="button" class="btn btn-outline-success btn-sm m-2" data-bs-toggle="modal"
+                                        data-bs-target="#inlineForm">
+                                        Isi Nilai Kriteria
+                                    </button>
+                  <div class="table-responsive">
+                  <table class="table table-striped mb-0">
+    <caption>
+        Tabel Nilai Mentah
+    </caption>
+    <tr>
+        <th rowspan='2'>Nama</th>
+        <th colspan='6'>Kriteria</th>
+    </tr>
+    <tr>
+        <th>A</th>
+        <th>B</th>
+        <th>C</th>
+        <th>D</th>
+        <th colspan="2">E</th>
+    </tr>
+    <tbody id="centerTableBody" class="center"></tbody>
+    
+</table>
+
+<table class="table table-striped mb-0">
+    <caption>
+        Tabel Perhitungan Hasil Normalisasi
+    </caption>
+    <tr>
+        <th rowspan='2'>Nama</th>
+        <th colspan='5'>Kriteria</th>
+    </tr>
+    <tr>
+        <th>A</th>
+        <th>B</th>
+        <th>C</th>
+        <th>D</th>
+        <th>E</th>
+    </tr>
+    <tbody id="centerTableBodyBawah" class="center"></tbody>
+</table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+        <footer>
+    <div class="footer clearfix mb-0 text-muted">
+        <div class="float-start">
+            <p>Karyawan Terbaik &copy; Simple Additive Weighting</p>
+        </div>
+        <div class="float-end">
+            <p>Al Ihsan Al Islamy <span class="text-danger"><i class="bi bi-heart"></i></span> <a
+                    href="">Tri Gusfri Nasnur</a></p>
+        </div>
+    </div>
+</footer>
+      </div>
+    </div>
+
+    <div class="modal fade text-left" id="inlineForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="myModalLabel33">Isi Nilai Kriteria </h4>
+                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                            <i data-feather="x"></i>
+                        </button>
+                    </div>
+                    <form id="formInline">
+                        <div class="modal-body">
+                            <label>Nama: </label>
+                            <div class="form-group">
+                            <select class="form-control form-select" name="id_alternative" id="selectAlternatif"></select>
+                            </div>
+                        </div>
+                        <div class="modal-body">
+                            <label>Kriteria: </label>
+                            <div class="form-group">
+                            <select class="form-control form-select" name="id_criteria" id="selectKriteria">
+                            
+                                          </select>
+                            </div>
+                        </div>
+                        <div class="modal-body">
+                            <label>Nilai: </label>
+                            <div class="form-group">
+                                <input type="text" name="value" placeholder="Isi Nilai" class="form-control"
+                                    required>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-light-secondary" data-bs-dismiss="modal">
+                                <i class="bx bx-x d-block d-sm-none"></i>
+                                <span class="d-none d-sm-block">Keluar</span>
+                            </button>
+                            <button type="submit" name="submit" class="btn btn-primary ml-1">
+                                <i class="bx bx-check d-block d-sm-none"></i>
+                                <span class="d-none d-sm-block">Simpan</span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <script src="assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+<script src="assets/js/bootstrap.bundle.min.js"></script>
+
+<script src="assets/vendors/apexcharts/apexcharts.js"></script>
+<script src="assets/js/pages/dashboard.js"></script>
+
+<script src="assets/js/main.js"></script>
+
+    <script>
+  const token = localStorage.getItem('token');
+  const role = localStorage.getItem('role'); // Ambil role dari localStorage
+  const centerTableBody = document.getElementById('centerTableBody');
+  const centerTableBodyBawah = document.getElementById('centerTableBodyBawah');
+  const message = document.getElementById('message');
+  let evaluationsList = {1: [],2: [],3: [],4: [],5: []};
+
+  if (!token) {
+      window.location.href = 'login.html';
+  }
+
+  function fetchEvaluations() {
+      fetch('http://localhost:3000/api/evaluations/group/order', {
+          method: 'GET',
+          headers: {
+              Authorization: 'Bearer ' + token,
+              'Cache-Control': 'no-cache'
+          }
+      })
+      .then(res => res.json())
+      .then(data => {
+          fetchEvaluationsBenefit();
+          centerTableBody.innerHTML = '';
+          data.forEach(evaluations => {
+              evaluationsList[1].push(evaluations.C1);
+              evaluationsList[2].push(evaluations.C2);
+              evaluationsList[3].push(evaluations.C3);
+              evaluationsList[4].push(evaluations.C4);
+              evaluationsList[5].push(evaluations.C5);
+
+              // Tombol Edit/Hapus hanya untuk admin
+              let actionButtons = '';
+              if(role === 'admin') {
+                  actionButtons = `
+                  <button class='btn btn-info btn-sm' onclick="window.location.href='keputusan-edit.html?id=${evaluations.id_alternative}'">Edit</button>
+                  <button class='btn btn-danger btn-sm' onclick="window.location.href='keputusan-hapus.html?id=${evaluations.id_alternative}'">Hapus</button>`;
+              }
+
+              let row = `<tr>
+                  <th>${evaluations.name}</th>
+                  <td>${evaluations.C1}</td>
+                  <td>${evaluations.C2}</td>
+                  <td>${evaluations.C3}</td>
+                  <td>${evaluations.C4}</td>
+                  <td>${evaluations.C5}</td>
+                  <td>${actionButtons}</td>
+              </tr>`;
+              centerTableBody.innerHTML += row;
+          });
+
+          // Tombol "Isi Nilai Kriteria" hanya untuk admin
+          const addButton = document.querySelector('button[data-bs-target="#inlineForm"]');
+          if(role !== 'admin' && addButton) addButton.style.display = 'none';
+      })
+      .catch(() => {
+          message.textContent = 'Gagal mengambil data.';
+      });
+  }
+
+  function fetchEvaluationsBenefit() {
+      fetch('http://localhost:3000/api/evaluations/benefit/group/order', {
+          method: 'GET',
+          headers: { Authorization: 'Bearer ' + token }
+      })
+      .then(res => res.json())
+      .then(data => {
+          centerTableBodyBawah.innerHTML = '';
+          data.forEach(evaluations => {
+              const arrC = [evaluations.C1, evaluations.C2, evaluations.C3, evaluations.C4, evaluations.C5];
+              let row = `<tr>
+                  <th>${evaluations.name}</th>`;
+              for(let i=0;i<5;i++){
+                  arrC[i] = Number(arrC[i].toFixed(2));
+                  row += `<td>${arrC[i]}</td>`;
+              }
+              row += `</tr>`;
+              centerTableBodyBawah.innerHTML += row;
+          });
+      })
+      .catch(() => {
+          message.textContent = 'Gagal mengambil data.';
+      });
+  }
+
+  function fetchAlternatif() {
+      fetch('http://localhost:3000/api/alternatif', {
+          headers: { Authorization: 'Bearer ' + token }
+      })
+      .then(res => res.json())
+      .then(data => {
+          const select = document.getElementById('selectAlternatif');
+          select.innerHTML = '<option value="">-- Pilih Nama --</option>';
+          data.forEach(item => {
+              select.innerHTML += `<option value="${item.id_alternative}">${item.name}</option>`;
+          });
+      })
+      .catch(() => alert('Gagal mengambil data alternatif'));
+  }
+
+  function fetchKriteria() {
+      fetch('http://localhost:3000/api/bobot', {
+          headers: { Authorization: 'Bearer ' + token }
+      })
+      .then(res => res.json())
+      .then(data => {
+          const select = document.getElementById('selectKriteria');
+          select.innerHTML = '<option value="">-- Pilih Kriteria --</option>';
+          data.forEach(item => {
+              select.innerHTML += `<option value="${item.id_criteria || item.weight}">${item.criteria || item.attribute}</option>`;
+          });
+      })
+      .catch(() => alert('Gagal mengambil data kriteria'));
+  }
+
+  // Modal form
+  const inlineForm = document.getElementById('inlineForm');
+  if (inlineForm) {
+      inlineForm.addEventListener('shown.bs.modal', () => {
+          fetchAlternatif();
+          fetchKriteria();
+      });
+  }
+
+  // Form submit
+  const formInline = document.getElementById('formInline');
+  formInline.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const id_alternative = document.getElementById('selectAlternatif').value;
+      const id_criteria = document.getElementById('selectKriteria').value;
+      const value = this.elements['value'].value;
+
+      if (!value) {
+          alert('Data belum lengkap!');
+          return;
+      }
+
+      fetch('http://localhost:3000/api/evaluations', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + token
+          },
+          body: JSON.stringify({ id_alternative, id_criteria, value })
+      })
+      .then(res => {
+          if (!res.ok) throw new Error('Gagal menyimpan data');
+          alert('Nilai berhasil disimpan');
+          fetchEvaluations(); 
+          formInline.reset();
+          bootstrap.Modal.getInstance(inlineForm).hide();
+      })
+      .catch(err => alert(err.message));
+  });
+
+  // Jalankan fetch data
+  fetchEvaluations();
+</script>
+  </body>
+
+</html>

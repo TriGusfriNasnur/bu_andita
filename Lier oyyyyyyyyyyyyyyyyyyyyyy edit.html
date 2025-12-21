@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Edit Nilai Kriteria</title>
+<link rel="stylesheet" href="assets/css/bootstrap.css">
+<link rel="stylesheet" href="assets/vendors/iconly/bold.css">
+<link rel="stylesheet" href="assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
+<link rel="stylesheet" href="assets/vendors/bootstrap-icons/bootstrap-icons.css">
+<link rel="stylesheet" href="assets/css/app.css">
+<link rel="shortcut icon" href="assets/images/favicon.png" type="image/x-icon">
+<style>
+/* Ubah font untuk seluruh halaman */
+body {
+    font-family: 'Calibri', sans-serif;
+}
+
+/* Khusus judul */
+h3, h4 {
+    font-family: 'Calibri', sans-serif;
+    font-weight: normal;
+}
+
+/* Khusus form dan label */
+form, label, input, button {
+    font-family: 'Calibri', sans-serif;
+}
+</style>
+</head>
+<body>
+<div id="app">
+
+  <!-- Sidebar -->
+  <div id="sidebar">
+    <div class="sidebar-wrapper active">
+      <div class="sidebar-header">
+        <div class="d-flex justify-content-between">
+          <div class="logo">
+            <a href="./">Al Ihsan <p>Al Islamy</p></a>
+          </div>
+          <div class="toggler">
+            <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="sidebar-menu">
+        <ul class="menu">
+          <li class="sidebar-title">Menu</li>
+          <li class="sidebar-item"><a href="./" class="sidebar-link"><i class="bi bi-grid-fill"></i><span>Beranda</span></a></li>
+          <li class="sidebar-item has-sub">
+            <a href="#" class="sidebar-link"><i class="bi bi-file-earmark-spreadsheet-fill"></i><span>Karyawan & Kriteria</span></a>
+            <ul class="submenu">
+              <li class="submenu-item"><a href="alternatif.html">Karyawan</a></li>
+              <li class="submenu-item"><a href="bobot.html">Kriteria</a></li>
+            </ul>
+          </li>
+          <li class="sidebar-item"><a href="matrik.html" class="sidebar-link"><i class="bi bi-pentagon-fill"></i><span>Perhitungan</span></a></li>
+          <li class="sidebar-item"><a href="preferensi.html" class="sidebar-link"><i class="bi bi-bar-chart-fill"></i><span>Peringkat</span></a></li>
+          <li class="sidebar-item"><a href="logout.html" class="sidebar-link"><i class="bi bi-box-arrow-right"></i><span>Keluar</span></a></li>
+        </ul>
+      </div>
+      <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div id="main">
+    <div class="page-heading">
+      <h3>Edit Nilai Kriteria</h3>
+    </div>
+    <div class="page-content">
+      <div class="card">
+        <div class="card-body">
+
+          <h4>Nama: <span id="namaAlternatif">...</span></h4>
+          <hr>
+
+          <form id="formKeputusan">
+            <input type="hidden" id="id_alternative">
+
+            <input type="number" class="form-control mb-2" id="C1" min="0" max="30" required>
+
+            <input type="number" class="form-control mb-2" id="C2" min="0" max="25" required>
+
+            <input type="number" class="form-control mb-2" id="C3" min="0" max="20" required>
+
+            <input type="number" class="form-control mb-2" id="C4" min="0" max="15" required>
+
+            <input type="number" class="form-control mb-2" id="C5" min="0" max="10" required>
+
+            <div class="mt-3">
+              <a href="matrik.html" class="btn btn-secondary">Kembali</a>
+              <button type="submit" class="btn btn-primary">Simpan</button>
+            </div>
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+const token = localStorage.getItem('token');
+if (!token) window.location.href = 'login.html';
+
+const params = new URLSearchParams(window.location.search);
+const idAlternatif = params.get('id');
+if (!idAlternatif) {
+  alert('ID alternatif tidak ditemukan');
+  window.location.href = 'matrik.html';
+}
+document.getElementById('id_alternative').value = idAlternatif;
+
+// Mapping input ID
+const kriteriaInputMap = {1:'C1', 2:'C2', 3:'C3', 4:'C4', 5:'C5'};
+
+// Simpan data kriteria dari API
+let kriteriaList = [];
+
+// Load nama karyawan
+async function loadNama() {
+  try {
+    const res = await fetch('http://localhost:3000/api/alternatif', {
+      headers: { 'Authorization': 'Bearer ' + token }
+    });
+    if (!res.ok) throw new Error('Gagal ambil data alternatif');
+    const allAlternatif = await res.json();
+    const alt = allAlternatif.find(a => a.id_alternative == idAlternatif);
+    document.getElementById('namaAlternatif').textContent = alt ? alt.name : 'Nama tidak ditemukan';
+  } catch (err) {
+    console.error(err);
+    document.getElementById('namaAlternatif').textContent = 'Gagal memuat nama';
+  }
+}
+
+// Load kriteria dari API bobot
+async function loadKriteria() {
+  try {
+    const res = await fetch('http://localhost:3000/api/bobot', {
+      headers: { 'Authorization': 'Bearer ' + token }
+    });
+    if (!res.ok) throw new Error('Gagal ambil data bobot');
+    kriteriaList = await res.json();
+
+     // Tambahkan label di atas input
+    kriteriaList.forEach(kriteria => {
+      const inputId = kriteriaInputMap[kriteria.id_criteria];
+      const inputEl = document.getElementById(inputId);
+      if(inputEl) {
+        const label = document.createElement('label');
+        label.htmlFor = inputId;
+        label.textContent = `${kriteria.criteria} (${kriteria.weight})`;
+        inputEl.parentNode.insertBefore(label, inputEl);
+      }
+    });
+
+  } catch(err){
+    console.error(err);
+    alert('Gagal memuat kriteria: ' + err.message);
+  }
+}
+   
+// Load nilai karyawan
+async function loadValues() {
+  try {
+    const res = await fetch('http://localhost:3000/api/evaluations', {
+      headers: { 'Authorization': 'Bearer ' + token }
+    });
+    if(!res.ok) throw new Error('Gagal ambil data evaluasi');
+    const allData = await res.json();
+    const evalData = allData.filter(item => item.id_alternative == idAlternatif);
+
+    evalData.forEach(item => {
+      const inputId = kriteriaInputMap[item.id_criteria];
+      if(inputId && document.getElementById(inputId)){
+        document.getElementById(inputId).value = item.value;
+      }
+    });
+
+  } catch(err){
+    console.error(err);
+    alert('Gagal memuat nilai: ' + err.message);
+  }
+}
+
+// Panggil saat halaman dibuka
+loadNama();
+loadKriteria().then(() => loadValues());
+</script>
+
+<script src="assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+<script src="assets/js/bootstrap.bundle.min.js"></script>
+<script src="assets/js/main.js"></script>
+</body>
+</html>

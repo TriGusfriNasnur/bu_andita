@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tri Gusfri Nasnur</title>
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/bootstrap.css">
+    <link rel="stylesheet" href="assets/vendors/iconly/bold.css">
+    <link rel="stylesheet" href="assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
+    <link rel="stylesheet" href="assets/vendors/bootstrap-icons/bootstrap-icons.css">
+    <link rel="stylesheet" href="assets/css/app.css">
+    <link rel="shortcut icon" href="assets/images/favicon.png" type="image/x-icon">
+</head>
+
+<body>
+    <div id="app">
+        <div id="sidebar" class="active">
+            <div class="sidebar-wrapper active">
+                <div class="sidebar-header">
+                    <div class="d-flex justify-content-between">
+                        <div class="logo">
+                            <a href="./">Al Ihsan 
+                                <p>Al Islamy</p></a>
+                        </div>
+                        <div class="toggler">
+                            <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="sidebar-menu">
+                    <ul class="menu">
+                        <li class="sidebar-title">Menu</li>
+
+                        <li class="sidebar-item">
+                            <a href="./" class='sidebar-link'>
+                                <i class="bi bi-grid-fill"></i>
+                                <span>Beranda</span>
+                            </a>
+                        </li>
+
+                        <li class="sidebar-item  has-sub">
+                            <a href="#" class='sidebar-link'>
+                                <i class="bi bi-file-earmark-spreadsheet-fill"></i>
+                                <span>Karyawan & Kriteria</span>
+                            </a>
+                            <ul class="submenu ">
+                                <li class="submenu-item ">
+                                    <a href="alternatif.html">Karyawan</a>
+                                </li>
+                                <li class="submenu-item ">
+                                    <a href="bobot.html">Kriteria</a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="sidebar-item">
+                            <a href="matrik.html" class='sidebar-link'>
+                                <i class="bi bi-pentagon-fill"></i>
+                                <span>Perhitungan</span>
+                            </a>
+                        </li>
+
+                        <li class="sidebar-item">
+                            <a href="preferensi.html" class='sidebar-link'>
+                                <i class="bi bi-bar-chart-fill"></i>
+                                <span>Peringkat</span>
+                            </a>
+                        </li>
+
+                        <li class="sidebar-item">
+                            <a href="logout.html" class='sidebar-link'>
+                                <i class="bi bi-box-arrow-right"></i>
+                                <span>Keluar</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>
+            </div>
+        </div>
+
+        <div id="main">
+            <header class="mb-3">
+                <a href="#" class="burger-btn d-block d-xl-none">
+                    <i class="bi bi-justify fs-3"></i>
+                </a>
+            </header>
+
+            <div class="page-heading">
+                <h3>Karyawan</h3>
+            </div>
+
+            <div class="page-content">
+                <section class="row">
+                    <div class="col-12">
+                        <div class="card">
+
+                            <div class="card-header">
+                                <h4 class="card-title">Data Karyawan</h4>
+                            </div>
+                            <div class="card-content">
+                                <div class="card-body">
+                                    <p class="card-text">
+                                        Daftar Karyawan Al Ihsan Al Islamy
+                                    </p>
+                                </div>
+                                <button id="tambahBtn" type="button" class="btn btn-outline-success btn-sm m-2" data-bs-toggle="modal"
+                                    data-bs-target="#inlineForm">
+                                    Tambah Karyawan
+                                </button>
+                                <hr>
+                                <div class="table-responsive">
+                                    <p id="message" class="mt-4 text-center text-sm text-red-500"></p>
+                                    <table class="table table-striped mb-0" id="alternatifTableBody">
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <footer>
+                <div class="footer clearfix mb-0 text-muted">
+                    <div class="float-start">
+                        <p>Karyawan Terbaik &copy; Simple Additive Weighting</p>
+                    </div>
+                    <div class="float-end">
+                        <p>Al Ihsan Al Islamy <span class="text-danger"><i class="bi bi-heart"></i></span> <a
+                                href="">Tri Gusfri Nasnur</a></p>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <div class="modal fade text-left" id="inlineForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel33">Tambah Karyawan </h4>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <i data-feather="x"></i>
+                    </button>
+                </div>
+                <form action="" id="tambahKaryawan" method="post">
+                    <p id="messageTambahKaryawan" class="mt-4 text-center text-sm text-red-500"></p>                        
+                    <div class="modal-body" >
+                        <label>Nama: </label>
+                        <div class="form-group">
+                            <input type="text" id="addName" name="name" placeholder="Nama Karyawan" class="form-control"
+                                required>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-light-secondary" data-bs-dismiss="modal">
+                            <i class="bx bx-x d-block d-sm-none"></i>
+                            <span class="d-none d-sm-block">Keluar</span>
+                        </button>
+                        <button type="submit" name="Kirim" class="btn btn-primary ml-1">
+                            <i class="bx bx-check d-block d-sm-none"></i>
+                            <span class="d-none d-sm-block">Simpan</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const token = localStorage.getItem('token');
+        const role = localStorage.getItem('role'); // ambil role dari localStorage
+        const form = document.getElementById('tambahKaryawan');
+        const alternatifTableBody = document.getElementById('alternatifTableBody');
+        const message = document.getElementById('message');
+        const messagetambahKaryawan = document.getElementById('messageTambahKaryawan');
+        const tambahBtn = document.getElementById('tambahBtn');
+        let no = 1;
+
+        if (!token) {
+            window.location.href = 'login.html';
+        }
+
+        // Hide buttons for role = user
+        if (role !== 'admin') {
+            tambahBtn.style.display = 'none';
+        }
+
+        function fetchAlternatif() {
+            fetch('http://localhost:3000/api/alternatif', {
+                method: 'GET',
+                headers: { Authorization: 'Bearer ' + token }
+            })
+            .then(res => res.json())
+            .then(data => {
+                alternatifTableBody.innerHTML = '';
+                const headerRow = `<caption>Tabel Karyawan<i class="bi bi-heart"></i></caption>
+                    <tr>
+                        <th>Nomor</th>
+                        <th colspan="2">Nama</th>
+                    </tr>`;
+                alternatifTableBody.innerHTML += headerRow;
+
+                data.forEach(alternatif => {
+                    let actionBtns = '';
+                    if (role === 'admin') {
+                        actionBtns = `
+                        <div class='btn-group mb-1'>
+                            <div id='dropdown' class='dropdown'>
+                                <button class='btn btn-primary dropdown-toggle me-1 btn-sm' type='button'
+                                    id='dropdownMenuButton' data-bs-toggle='dropdown'
+                                    aria-haspopup='true' aria-expanded='false'>
+                                    Edit
+                                </button>
+                                <div class='dropdown-menu' aria-labelledby='dropdownMenuButton'>
+                                    <a class='dropdown-item' href='alternatif-edit.html?id=${alternatif.id_alternative}'>Edit</a>
+                                    <button type='submit' class='dropdown-item' onclick='deleteAlternatif(${alternatif.id_alternative})'>
+                                        <a class='dropdown-item' style='padding:0;'>Hapus</a>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>`;
+                    }
+
+                    const row = `
+                        <tr>
+                            <td class='right'>${(no++)}</td>
+                            <td class='center'>${alternatif.name}</td>
+                            <td>${actionBtns}</td>
+                        </tr>`;
+                    alternatifTableBody.innerHTML += row;
+                });
+            })
+            .catch(() => {
+                message.textContent = 'Gagal mengambil data.';
+            });
+        }
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const name = document.getElementById('addName').value;
+            try {
+                const response = await fetch('http://localhost:3000/api/alternatif', {
+                    method: 'POST',
+                    headers: { 
+                        'Content-Type': 'application/json', 
+                        'Authorization': 'Bearer ' + token
+                    },
+                    body: JSON.stringify({ name })
+                });
+                const data = await response.json();
+                if (response.ok) {
+                    message.textContent = 'Karyawan baru berhasil ditambahkan';
+                    message.classList.remove('text-red-500');
+                    message.classList.add('text-green-500');
+                    form.reset();
+                    window.location.href = 'alternatif.html';
+                } else {
+                    message.textContent = data.message || 'Gagal menambahkan karyawan baru.';
+                }
+            } catch (error) {
+                message.textContent = 'Gagal terhubung ke server.';
+            }
+        });
+
+        function deleteAlternatif(id) {
+            if (confirm('Yakin ingin menghapus pengguna ini?')) {
+                fetch(`http://localhost:3000/api/alternatif/${id}`, {
+                    method: 'DELETE',
+                    headers: { Authorization: 'Bearer ' + token }
+                })
+                .then(res => {
+                    if (!res.ok) throw new Error('Gagal hapus');
+                    else window.location.href = "alternatif.html";
+                })
+                .catch(err => { alert(err.message); });
+            }
+        }
+
+        fetchAlternatif();
+    </script>
+
+    <script src="assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/vendors/apexcharts/apexcharts.js"></script>
+    <script src="assets/js/pages/dashboard.js"></script>
+    <script src="assets/js/main.js"></script>
+</body>
+</html>

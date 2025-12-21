@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Matrix R</title>
+</head>
+<body>
+
+<script>
+/**
+ * ===============================
+ * AUTH
+ * ===============================
+ */
+const token = localStorage.getItem('token');
+if (!token) {
+  window.location.href = 'login.html';
+}
+
+/**
+ * ===============================
+ * VARIABEL GLOBAL
+ * ===============================
+ */
+let X = {}; // matrix awal
+let R = {}; // matrix normalisasi
+let criteriaAttr = {}; // benefit / cost
+
+/**
+ * ===============================
+ * AMBIL ATTRIBUTE KRITERIA
+ * ===============================
+ */
+async function fetchCriteria() {
+  const res = await fetch('http://localhost:3000/api/bobot/order', {
+    headers: { Authorization: 'Bearer ' + token }
+  });
+  const data = await res.json();
+
+  data.forEach(c => {
+    criteriaAttr[c.id_criteria] = c.attribute;
+  });
+}
+
+/**
+ * ===============================
+ * AMBIL MATRIX X
+ * ===============================
+ */
+async function fetchMatrixX() {
+  const res = await fetch('http://localhost:3000/api/evaluations', {
+    headers: { Authorization: 'Bearer ' + token }
+  });
+  const data = await res.json();
+
+  // init X
+  data.forEach(d => {
+    if (!X[d.id_criteria]) X[d.id_criteria] = [];
+    X[d.id_criteria].push(Number(d.value));
+  });
+}
+
+/**
+ * ===============================
+ * HITUNG MATRIX R
+ * ===============================
+ */
+async function hitungR() {
+  await fetchCriteria();
+  await fetchMatrixX();
+
+  const res = await fetch('http://localhost:3000/api/evaluations', {
+    headers: { Authorization: 'Bearer ' + token }
+  });
+  const data = await res.json();
+
+  data.forEach(d => {
+    const idAlt = d.id_alternative;
+    const idCri = d.id_criteria;
+    const val = Number(d.value);
+
+    if (!R[idAlt]) R[idAlt] = [];
+
+    const max = Math.max(...X[idCri]);
+    const min = Math.min(...X[idCri]);
+
+    let hasil = 0;
+    if (criteriaAttr[idCri] === 'benefit') {
+      hasil = val / max;
+    } else {
+      hasil = min / val;
+    }
+
+    R[idAlt][idCri - 1] = Number(hasil.toFixed(4));
+  });
+
+  console.log('Matrix R:', R);
+
+  // 🔹 supaya bisa dipakai file lain
+  window.R = R;
+}
+
+// Jalankan
+hitungR();
+</script>
+
+</body>
+</html>

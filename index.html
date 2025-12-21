@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="id">
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tri Gusfri Nasnur</title>
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/bootstrap.css">
+
+    <link rel="stylesheet" href="assets/vendors/iconly/bold.css">
+
+    <link rel="stylesheet" href="assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
+    <link rel="stylesheet" href="assets/vendors/bootstrap-icons/bootstrap-icons.css">
+    <link rel="stylesheet" href="assets/css/app.css">
+    <link rel="shortcut icon" href="assets/images/favicon.png" type="image/x-icon">
+</head>
+    <body>
+        <div id="app">
+            <div id="sidebar" class="active">
+    <div class="sidebar-wrapper active">
+        <div class="sidebar-header">
+            <div class="d-flex justify-content-between">
+                <div class="logo">
+                    <a href="./">Al Ihsan 
+                        <p>Al Islamy</p></a>
+                </div>
+                <div class="toggler">
+                    <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="sidebar-menu">
+            <ul class="menu">
+                <li class="sidebar-title">Menu</li>
+
+                <li class="sidebar-item">
+                    <a href="./" class='sidebar-link'>
+                        <i class="bi bi-grid-fill"></i>
+                        <span>Beranda</span>
+                    </a>
+                </li>
+
+                <li class="sidebar-item  has-sub">
+                    <a href="#" class='sidebar-link'>
+                        <i class="bi bi-file-earmark-spreadsheet-fill"></i>
+                        <span>Karyawan & Kriteria</span>
+                    </a>
+                    <ul class="submenu ">
+                        <li class="submenu-item ">
+                            <a href="alternatif.html">Karyawan</a>
+                        </li>
+                        <li class="submenu-item ">
+                            <a href="bobot.html">Kriteria</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="sidebar-item">
+                    <a href="matrik.html" class='sidebar-link'>
+                        <i class="bi bi-pentagon-fill"></i>
+                        <span>Perhitungan</span>
+                    </a>
+                </li>
+
+                <li class="sidebar-item">
+                    <a href="preferensi.html" class='sidebar-link'>
+                        <i class="bi bi-bar-chart-fill"></i>
+                        <span>Peringkat</span>
+                    </a>
+                </li>
+
+                <li class="sidebar-item">
+                    <a href="logout.html" class='sidebar-link'>
+                        <i class="bi bi-box-arrow-right"></i>
+                        <span>Keluar</span>
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+        <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>
+    </div>
+</div>
+            <div id="main">
+                <header class="mb-3">
+                    <a href="#" class="burger-btn d-block d-xl-none">
+                        <i class="bi bi-justify fs-3"></i>
+                    </a>
+                </header>
+                <div class="page-heading">
+                    <h3>Beranda</h3>
+                </div>
+                <div class="page-content">
+                    <section class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4>Sistem Penunjang Keputusan Pemilihan Karyawan Terbaik menggunakan metode Simple Additive Weighting</h4>
+                                </div>
+                                <div class="card-content">
+                                    <div class="card-body">
+                                        <p class="card-text">
+                                            Metode Simple Additive Weighting (SAW) adalah salah satu metode yang banyak digunakan dalam sistem penunjang keputusan karena sederhana dan mudah diterapkan. Metode ini dipakai untuk menentukan karyawan Terbaik berdasarkan beberapa kriteria yang telah ditetapkan. Nilai kriteria dari masing-masing karyawan akan dimasukan ke dalam perhitungan sehingga menghasilkan nilai peringkat. Karyawan dengan peringkat teratas dianggap karyawan terbaik.
+                                        </p>
+                                        <hr>
+                                        <p class="card-text">
+                                            Langkah Penyelesaian Simple Additive Weighting (SAW) adalah sebagai berikut
+                                            :
+                                        </p>
+                                        <ol type="1">
+                                            <li>Menentukan kriteria-kriteria yang akan dijadikan acuan dalam pengambilan
+                                                keputusan</i>
+                                            <li>Memasukan kriteria yang telah ditetapkan pada setiap masing-masing karyawan
+                                            </li>
+                                            <li>Membuat perhitungan keputusan berdasarkan nilai-nilai kriteria pada setiap masing-masing karyawan</li>
+                                            <li>Hasil akhir diperoleh dari proses perhitungan keputusan berdasarkan kriteria dari setiap masing-masing karyawan</li>
+                                        </ol>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                <footer>
+    <div class="footer clearfix mb-0 text-muted">
+        <div class="float-start">
+            <p>Karyawan Terbaik &copy; Simple Additive Weighting</p>
+        </div>
+        <div class="float-end">
+            <p>Al Ihsan Al Islamy <span class="text-danger"><i class="bi bi-heart"></i></span> <a
+                    href="">Tri Gusfri Nasnur</a></p>
+        </div>
+    </div>
+</footer>
+
+            </div>
+        </div>
+        <script>
+            const token = localStorage.getItem('token');
+        //const form = document.getElementById('tambahKaryawan');
+        //const alternatifTableBody = document.getElementById('alternatifTableBody');
+        //const message = document.getElementById('message');
+        //const messagetambahKaryawan = document.getElementById('messageTambahKaryawan');
+        //let no = 1;
+        console.log(token);
+        if (!token) {
+            window.location.href = 'login.html';
+        }
+        </script>
+<script src="assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+<script src="assets/js/bootstrap.bundle.min.js"></script>
+
+<script src="assets/vendors/apexcharts/apexcharts.js"></script>
+<script src="assets/js/pages/dashboard.js"></script>
+
+<script src="assets/js/main.js"></script>
+
+    </body>
+    
+</html>

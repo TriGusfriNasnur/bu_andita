@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Update Kriteria</title>
+</head>
+<body>
+
+<script>
+  const token = localStorage.getItem('token');
+
+  if (!token) {
+    window.location.href = 'login.html';
+  }
+
+  // pengganti $_POST
+  const id = localStorage.getItem('edit_bobot_id');
+  const criteria = localStorage.getItem('edit_bobot_criteria');
+  const weight = localStorage.getItem('edit_bobot_weight');
+  const attribute = localStorage.getItem('edit_bobot_attribute');
+
+  if (!id || !criteria || !weight || !attribute) {
+    alert('Data edit kriteria tidak lengkap');
+    window.location.href = 'bobot.html';
+  }
+
+  fetch('http://localhost:3000/api/bobot/${id}', {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + token
+    },
+    body: JSON.stringify({
+      criteria,
+      weight,
+      attribute
+    })
+  })
+  .then(res => {
+    if (!res.ok) throw new Error('Gagal update kriteria');
+    // bersihkan storage
+    localStorage.removeItem('edit_bobot_id');
+    localStorage.removeItem('edit_bobot_criteria');
+    localStorage.removeItem('edit_bobot_weight');
+    localStorage.removeItem('edit_bobot_attribute');
+
+    window.location.href = 'bobot.html';
+  })
+  .catch(err => {
+    alert(err.message);
+    window.location.href = 'bobot.html';
+  });
+</script>
+
+</body>
+</html>

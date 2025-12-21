@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Bobot Kriteria</title>
+</head>
+<body>
+
+<script>
+/**
+ * ===============================
+ * AUTH CHECK
+ * ===============================
+ */
+const token = localStorage.getItem('token');
+if (!token) {
+  window.location.href = 'login.html';
+}
+
+/**
+ * ===============================
+ * AMBIL DATA BOBOT (W)
+ * ===============================
+ */
+let W = [];
+
+function fetchW() {
+  fetch('http://localhost:3000/api/bobot/order', {
+    method: 'GET',
+    headers: {
+      'Authorization': 'Bearer ' + token
+    }
+  })
+  .then(res => res.json())
+  .then(data => {
+    W = data.map(item => Number(item.weight));
+    console.log('Bobot W:', W);
+
+    // 🔹 kalau mau dipakai global (misal preferensi.html)
+    window.W = W;
+  })
+  .catch(err => {
+    console.error('Gagal mengambil bobot', err);
+  });
+}
+
+// Jalankan otomatis
+fetchW();
+</script>
+
+</body>
+</html>

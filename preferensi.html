@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tri Gusfri Nasnur</title>
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/bootstrap.css">
+
+    <link rel="stylesheet" href="assets/vendors/iconly/bold.css">
+
+    <link rel="stylesheet" href="assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
+    <link rel="stylesheet" href="assets/vendors/bootstrap-icons/bootstrap-icons.css">
+    <link rel="stylesheet" href="assets/css/app.css">
+    <link rel="shortcut icon" href="assets/images/favicon.png" type="image/x-icon">
+</head>
+
+<body>
+  <div id="app">
+        <div id="sidebar" class="active">
+    <div class="sidebar-wrapper active">
+        <div class="sidebar-header">
+            <div class="d-flex justify-content-between">
+                <div class="logo">
+                    <a href="./">Al Ihsan 
+                        <p>Al Islamy</p></a>
+                </div>
+                <div class="toggler">
+                    <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="sidebar-menu">
+            <ul class="menu">
+                <li class="sidebar-title">Menu</li>
+
+                <li class="sidebar-item">
+                    <a href="./" class='sidebar-link'>
+                        <i class="bi bi-grid-fill"></i>
+                        <span>Beranda</span>
+                    </a>
+                </li>
+
+                <li class="sidebar-item  has-sub">
+                    <a href="#" class='sidebar-link'>
+                        <i class="bi bi-file-earmark-spreadsheet-fill"></i>
+                        <span>Karyawan & Kriteria</span>
+                    </a>
+                    <ul class="submenu ">
+                        <li class="submenu-item ">
+                            <a href="alternatif.html">Karyawan</a>
+                        </li>
+                        <li class="submenu-item ">
+                            <a href="bobot.html">Kriteria</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="sidebar-item">
+                    <a href="matrik.html" class='sidebar-link'>
+                        <i class="bi bi-pentagon-fill"></i>
+                        <span>Perhitungan</span>
+                    </a>
+                </li>
+
+                <li class="sidebar-item">
+                    <a href="preferensi.html" class='sidebar-link'>
+                        <i class="bi bi-bar-chart-fill"></i>
+                        <span>Peringkat</span>
+                    </a>
+                </li>
+
+                <li class="sidebar-item">
+                    <a href="logout.html" class='sidebar-link'>
+                        <i class="bi bi-box-arrow-right"></i>
+                        <span>Keluar</span>
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+        <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>
+    </div>
+</div>
+
+    <!-- paste sidebar kamu di sini (tidak diubah) -->
+
+    <div id="main">
+        <div class="page-heading">
+            <h3>Peringkat</h3>
+        </div>
+
+        <div class="page-content">
+            <section class="row">
+                <div class="col-12">
+                    <div class="card">
+
+                        <div class="card-header">
+                            <h4 class="card-title">Peringkat Karyawan Terbaik</h4>
+                        </div>
+
+                        <div class="card-content">
+                            <div class="card-body">
+                                <p class="card-text">
+                                    <b><u>Tabel hasil peringkat Karyawan Terbaik</u></b> berdasarkan metode
+                                    Simple Additive Weighting (SAW).
+                                    <p>Karyawan cm bisa liat gk bisa edit 😛 <i>wkwkwkwk🤪🤣🤣</i></p>
+                                </p>
+                            </div>
+
+                            <div class="table-responsive">
+                                <table class="table table-striped mb-0">
+                                    <caption>Tabel Peringkat</caption>
+                                    <thead>
+                                        <tr>
+                                            <th>Nomor</th>
+                                            <th>Nama</th>
+                                            <th>Nilai</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="rankingBody"></tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- FOOTER TETAP -->
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', async () => {
+  const token = localStorage.getItem('token');
+  if (!token) {
+    window.location.href = 'login.html';
+    return;
+  }
+
+  const tbody = document.getElementById('rankingBody');
+
+  try {
+    /* ===============================
+       1️⃣ AMBIL BOBOT & NORMALISASI
+    =============================== */
+    const resBobot = await fetch('http://localhost:3000/api/bobot', {
+      headers: { Authorization: 'Bearer ' + token }
+    });
+    const bobotData = await resBobot.json();
+
+    // bobot SAW (dibagi 100)
+    const W = {};
+    bobotData.forEach(b => {
+      W[b.id_criteria] = b.weight / 100;
+    });
+
+    /* ===============================
+       2️⃣ AMBIL DATA NORMALISASI
+    =============================== */
+    const resEval = await fetch(
+      'http://localhost:3000/api/evaluations/benefit/group/order',
+      { headers: { Authorization: 'Bearer ' + token } }
+    );
+    const data = await resEval.json();
+
+    /* ===============================
+       3️⃣ HITUNG NILAI PREFERENSI
+    =============================== */
+    const hasil = data.map(item => {
+      const nilai =
+        item.C1 * W[1] +
+        item.C2 * W[2] +
+        item.C3 * W[3] +
+        item.C4 * W[4] +
+        item.C5 * W[5];
+
+      return {
+        nama: item.name,
+        nilai: Number(nilai.toFixed(4))
+      };
+    });
+
+    /* ===============================
+       4️⃣ SORT DESC
+    =============================== */
+    hasil.sort((a, b) => b.nilai - a.nilai);
+
+    /* ===============================================
+       Bagian Tabel ( Nilai dan nama dan nomor dll)
+    ================================================ */
+    tbody.innerHTML = '';
+    hasil.forEach((row, i) => {
+      tbody.innerHTML += `
+        <tr>
+          <td>${i + 1}</td>
+          <td>${row.nama}</td>
+          <td>${row.nilai * 100}</td>
+        </tr>
+      `;
+    });
+
+  } catch (err) {
+    console.error('ERROR RANKING:', err);
+    alert('Gagal menampilkan peringkat. Cek console.');
+  }
+});
+</script>
+
+<script src="assets/js/bootstrap.bundle.min.js"></script>
+<script src="assets/js/main.js"></script>
+</body>
+</html>

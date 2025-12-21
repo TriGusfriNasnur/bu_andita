@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Simpan Karyawan</title>
+</head>
+<body>
+
+<script>
+  const token = localStorage.getItem('token');
+
+  if (!token) {
+    window.location.href = 'login.html';
+  }
+
+  // ambil data dari localStorage (atau bisa dari form sebelumnya)
+  const name = localStorage.getItem('nama_alternatif');
+
+  if (!name) {
+    alert('Nama karyawan kosong');
+    window.location.href = 'alternatif.html';
+  }
+
+  fetch('http://localhost:3000/api/alternatif', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + token
+    },
+    body: JSON.stringify({ name })
+  })
+  .then(res => {
+    if (!res.ok) throw new Error('Gagal menyimpan data');
+    window.location.href = 'alternatif.html';
+  })
+  .catch(err => {
+    alert(err.message);
+    window.location.href = 'alternatif.html';
+  });
+</script>
+
+</body>
+</html>

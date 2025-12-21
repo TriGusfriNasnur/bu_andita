@@ -1,0 +1,239 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tri Gusfri Nasnur</title>
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/bootstrap.css">
+
+    <link rel="stylesheet" href="assets/vendors/iconly/bold.css">
+
+    <link rel="stylesheet" href="assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
+    <link rel="stylesheet" href="assets/vendors/bootstrap-icons/bootstrap-icons.css">
+    <link rel="stylesheet" href="assets/css/app.css">
+    <link rel="shortcut icon" href="assets/images/favicon.png" type="image/x-icon">
+</head>
+    <script>
+  // Ambil query string dari URL
+  const queryString = window.location.search; 
+  // 👉 hasilnya: "?id=5"
+  // 
+  // Buat objek untuk membaca parameter
+  const urlParams = new URLSearchParams(queryString);
+  // Ambil nilai parameter 'id'
+  const id = urlParams.get('id');
+  // Tampilkan
+  </script>
+    <body>
+        <div id="app">
+            <div id="sidebar" class="active">
+    <div class="sidebar-wrapper active">
+        <div class="sidebar-header">
+            <div class="d-flex justify-content-between">
+                <div class="logo">
+                    <a href="./">Al Ihsan 
+                        <p>Al Islamy</p></a>
+                </div>
+                <div class="toggler">
+                    <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="sidebar-menu">
+            <ul class="menu">
+                <li class="sidebar-title">Menu</li>
+
+                <li class="sidebar-item">
+                    <a href="./" class='sidebar-link'>
+                        <i class="bi bi-grid-fill"></i>
+                        <span>Beranda</span>
+                    </a>
+                </li>
+
+                <li class="sidebar-item  has-sub">
+                    <a href="#" class='sidebar-link'>
+                        <i class="bi bi-file-earmark-spreadsheet-fill"></i>
+                        <span>Karyawan & Kriteria</span>
+                    </a>
+                    <ul class="submenu ">
+                        <li class="submenu-item ">
+                            <a href="alternatif.html">Karyawan</a>
+                        </li>
+                        <li class="submenu-item ">
+                            <a href="bobot.html">Kriteria</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="sidebar-item">
+                    <a href="matrik.html" class='sidebar-link'>
+                        <i class="bi bi-pentagon-fill"></i>
+                        <span>Perhitungan</span>
+                    </a>
+                </li>
+
+                <li class="sidebar-item">
+                    <a href="preferensi.html" class='sidebar-link'>
+                        <i class="bi bi-bar-chart-fill"></i>
+                        <span>Peringkat</span>
+                    </a>
+                </li>
+
+                <li class="sidebar-item">
+                    <a href="logout.html" class='sidebar-link'>
+                        <i class="bi bi-box-arrow-right"></i>
+                        <span>Keluar</span>
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+        <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>
+    </div>
+</div>
+
+            <div id="main">
+                <header class="mb-3">
+                    <a href="#" class="burger-btn d-block d-xl-none">
+                        <i class="bi bi-justify fs-3"></i>
+                    </a>
+                </header>
+                <div class="page-heading">
+                    <h3>Kriteria</h3>
+                </div>
+                <div class="page-content">
+                    <section class="row">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">Edit Kriteria</h4>
+                            <p id="message" class="mt-4 text-center text-sm text-red-500"></p>
+                        </div>
+
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col">
+                                    <form action="" method="" id="bobotIdBody">
+                                    <!--<div class="form-group">
+                                        <label for="basicInput">Kriteria</label>
+                                        <input type="text" id="id_criteria"class="form-control" name="id_criteria" value="<?=$row['id_criteria'];?>" hidden>
+                                        <input type="text" id="criteria"class="form-control" name="criteria" value="<?=$row['criteria'];?>">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="basicInput">Nilai</label>
+                                        <input type="text" id="weight" class="form-control" name="weight" value="<?=$row['weight'];?>">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="basicInput">Atribut</label>
+                                        <select id="attribute" class="form-control form-select" name="attribute">
+                                            <option value="benefit">Diharapkan</option>
+                                            <option value="cost">Dikurangi</option>
+                                          </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="submit" class="btn btn-info btn-sm" value="Selesai">
+                                    </div>-->
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </section>
+                </div>
+                
+<footer>
+    <div class="footer clearfix mb-0 text-muted">
+        <div class="float-start">
+            <p>Karyawan Terbaik &copy; Simple Additive Weighting</p>
+        </div>
+        <div class="float-end">
+            <p>Al Ihsan Al Islamy <span class="text-danger"><i class="bi bi-heart"></i></span> <a
+                    href="">Tri Gusfri Nasnur</a></p>
+        </div>
+    </div>
+</footer>
+
+            </div>
+        </div>
+        <script src="assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+<script src="assets/js/bootstrap.bundle.min.js"></script>
+
+<script src="assets/vendors/apexcharts/apexcharts.js"></script>
+<script src="assets/js/pages/dashboard.js"></script>
+
+<script src="assets/js/main.js"></script>
+
+        <script>
+        const token = localStorage.getItem('token');
+        const bobotIdBody = document.getElementById('bobotIdBody');
+        const message = document.getElementById('message');
+        //let selectedUserId = null;
+        if (!token) {
+            window.location.href = 'login.html';
+        }
+
+        function fetchBobot() {
+      fetch(`http://localhost:3000/api/bobot/${id}`, {
+        method: 'GET',
+        headers: {
+          Authorization: 'Bearer ' + token
+        }
+      })
+      .then(res => res.json())
+      .then(bobot => {
+    bobotIdBody.innerHTML = `
+    <p id="message" class="mt-4 text-center text-sm text-red-500"></p>
+    <div class="form-group">
+    <label for="basicInput">Kriteria</label>
+    <input type="text" id="criteria" class="form-control" name="criteria" value="${bobot.criteria}">
+    </div>
+    <div class="form-group">
+    <label for="basicInput">Nilai</label>
+    <input type="text" id="weight" class="form-control" name="weight" value="${bobot.weight}">
+    </div>
+    <div class="form-group">
+    <label for="basicInput">Atribut</label>
+    <select id="attribute" class="form-control form-select" name="attribute">
+    <option value="benefit">Diharapkan</option>
+    <option value="cost">Dikurangi</option>
+    </select>
+    </div>
+    <div class="form-group">
+    <button onclick="saveChanges(${bobot.id_criteria})" style='background:none;border:none;'><input type="submit" class="btn btn-info btn-sm" value="Selesai"></button>
+    </div>`;
+  })
+  .catch(() => {
+    message.textContent = 'Gagal mengambil data.';
+  });
+}
+        function saveChanges(id) {
+            //const id_criteria = document.getElementById('id_criteria').value;
+            const criteria = document.getElementById('criteria').value;
+            const weight = document.getElementById('weight').value;
+            const attribute = document.getElementById('attribute').value;
+            
+            fetch(`http://localhost:3000/api/bobot/${id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + token
+                },
+                body: JSON.stringify({ criteria, weight, attribute})
+            })
+            .then(res => {
+                if (!res.ok) throw new Error('Gagal update');
+                else window.location.href = 'bobot.html';
+                fetchBobot();
+            })
+            .catch(err => {
+                alert(err.message);
+            });
+        }
+        fetchBobot();
+        </script>
+    </body>
+
+</html>

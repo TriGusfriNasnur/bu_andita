@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Hapus Keputusan</title>
+</head>
+<body>
+
+<script>
+/**
+ * ===============================
+ * AUTH
+ * ===============================
+ */
+const token = localStorage.getItem('token');
+if (!token) {
+  window.location.href = 'login.html';
+}
+
+/**
+ * ===============================
+ * AMBIL ID DARI URL
+ * ===============================
+ */
+const params = new URLSearchParams(window.location.search);
+const id = params.get('id');
+
+if (!id) {
+  alert('ID alternatif tidak ditemukan');
+  window.location.href = 'matrik.html';
+}
+
+/**
+ * ===============================
+ * PROSES DELETE
+ * ===============================
+ */
+console.log("ID yang akan dihapus:",id);
+fetch(`http://localhost:3000/api/evaluations/${id}`, {
+  method: 'DELETE',
+  headers: { 'Authorization': 'Bearer ' + token
+  }
+})
+.then(res => {
+  if (!res.ok) throw new Error('Gagal menghapus data');
+  return res.text();
+})
+.then(() => {
+  // redirect setelah sukses
+  window.location.href = 'matrik.html';
+})
+.catch(err => {
+  alert(err.message);
+  window.location.href = 'matrik.html';
+});
+</script>
+
+</body>
+</html>
