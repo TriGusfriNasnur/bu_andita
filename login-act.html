@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Login Proses</title>
+</head>
+<body>
+
+<script>
+/**
+ * ===============================
+ * AMBIL DATA DARI FORM LOGIN
+ * ===============================
+ */
+const params = new URLSearchParams(window.location.search);
+const username = params.get('username');
+const password = params.get('password');
+
+if (!username || !password) {
+  alert('Username atau password kosong');
+  window.location.href = 'login.html';
+}
+
+/**
+ * ===============================
+ * PROSES LOGIN
+ * ===============================
+ */
+fetch('http://localhost:3000/api/auth/login', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({
+    username,
+    password
+  })
+})
+.then(res => {
+  if (!res.ok) throw new Error('Login gagal');
+  return res.json();
+})
+.then(data => {
+  /**
+   * ===============================
+   * SIMPAN TOKEN & USER
+   * ===============================
+   */
+  localStorage.setItem('token', data.token);
+  localStorage.setItem('username', data.username);
+
+  /**
+   * ===============================
+   * REDIRECT
+   * ===============================
+   */
+  window.location.href = 'index.html';
+})
+.catch(err => {
+  alert('Username atau password salah');
+  window.location.href = 'login.html';
+});
+</script>
+
+</body>
+</html>
