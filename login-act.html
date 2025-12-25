@@ -26,7 +26,7 @@ if (!username || !password) {
  * PROSES LOGIN
  * ===============================
  */
-fetch('http://localhost:3000/api/auth/login', {
+fetch('/api/login', {
   method: 'POST',
   headers: {
     'Content-Type': 'application/json'
